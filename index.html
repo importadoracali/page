@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Importadora Cali | Repuestos para Camiones y Maquinaria Heavy Duty</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- ESTILOS PREMIUM Y BANNER ORIGINAL RESTAURADO -->
+    <style>
+        /* 1. Barra de Navegación */
+        .nav-bar { background: #cc0000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .nav-container a { color: white; padding: 15px 20px; text-decoration: none; font-weight: 500; transition: 0.3s; letter-spacing: 0.5px; }
+        .nav-container a:hover, .nav-container a.active { background: #a30000; font-weight: bold; }
+
+        /* 2. BANNER PRINCIPAL: CAMIÓN ILUMINADO COMO EL ORIGINAL */
+        .hero-banner {
+            position: relative;
+            padding: 80px 40px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            margin-bottom: 50px;
+            text-align: left; 
+            display: flex;
+            align-items: center;
+            z-index: 1;
+        }
+        
+        .hero-banner::before {
+            content: ""; position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* AQUÍ ESTÁ EL CAMBIO: 0.25 para que sea casi transparente y el camión brille */
+            background: rgba(0, 0, 0, 0.25); 
+            z-index: -1;
+            border-radius: 4px;
+        }
+        
+        .banner-text { 
+            max-width: 800px;
+            margin: 0; 
+        }
+        .banner-text h2 { 
+            color: #cc0000 !important; 
+            font-size: 2.5rem; 
+            font-weight: 900; 
+            margin-bottom: 15px; 
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.95); /* Sombra fuerte para que resalte en fondos claros */
+            letter-spacing: 0.5px;
+        }
+        .banner-text p { 
+            color: #ffffff !important; 
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            margin-bottom: 25px; 
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.95); 
+            line-height: 1.5;
+        }
+        .btn-banner { 
+            background: #cc0000 !important; 
+            color: white !important; 
+            padding: 12px 25px; 
+            border-radius: 4px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 1.1rem;
+            transition: 0.3s; 
+            display: inline-block; 
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .btn-banner:hover { background: #a30000 !important; transform: translateY(-2px); }
+
+        /* 3. Títulos de Secciones */
+        .section-title { color: #1a1a1a; font-weight: 900; font-size: 2rem; text-align: center; margin-bottom: 40px; text-transform: uppercase; letter-spacing: -0.5px; }
+        .section-title::after { content: ""; display: block; width: 60px; height: 4px; background: #cc0000; margin: 10px auto 0; border-radius: 2px;}
+        
+        .category-list a { transition: all 0.2s ease; }
+        .category-list a:hover { padding-left: 8px; color: #cc0000 !important; }
+
+        /* 4. Tarjetas de Nuevos Ingresos (Diseño Limpio) */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+        .product-card-clean {
+            background: #ffffff;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .product-card-clean:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(204, 0, 0, 0.12);
+            border-color: #ffcccc;
+        }
+        .badge-new {
+            position: absolute; top: 15px; left: 15px;
+            background: #cc0000; color: white;
+            padding: 6px 14px; font-size: 0.75rem; font-weight: 900;
+            border-radius: 50px; z-index: 10; letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(204,0,0,0.3);
+        }
+        .img-container {
+            height: 220px; padding: 20px;
+            display: flex; align-items: center; justify-content: center;
+            background: #ffffff; border-bottom: 1px solid #f5f5f5;
+        }
+        .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s; }
+        .product-card-clean:hover .img-container img { transform: scale(1.08); }
+        .card-body { padding: 25px 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; text-align: center; background: #fdfdfd; }
+        .card-body h3 { font-size: 1rem; color: #1a1a1a; margin-bottom: 20px; line-height: 1.5; font-weight: 800; }
+        .btn-catalogo {
+            display: block; width: 100%; background: transparent; color: #cc0000;
+            border: 2px solid #cc0000; padding: 12px; border-radius: 6px;
+            font-weight: 800; text-decoration: none; text-transform: uppercase; text-align: center;
+            transition: all 0.3s;
+        }
+        .btn-catalogo:hover { background: #cc0000; color: white; }
+
+        /* 5. Ajustes de la sección nosotros y video */
+        .btn-rojo { background-color: #cc0000; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 800; transition: all 0.3s; display: inline-block; border: none; box-shadow: 0 4px 15px rgba(204,0,0,0.3); }
+        .btn-rojo:hover { background-color: #a30000; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(204,0,0,0.4); }
+        .video-estilizado { border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); width: 100%; border: none; }
+
+        /* 6. Guía de Compra Interactiva */
+        .guia-compra {
+            margin-top: 80px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;
+        }
+        .paso {
+            background: #ffffff; padding: 40px 20px; border-radius: 12px; text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; transition: transform 0.3s;
+        }
+        .paso:hover { transform: translateY(-10px); border-color: #cc0000; }
+        .paso i { font-size: 3rem; margin-bottom: 20px; color: #cc0000; }
+        .paso h4 { color: #1a1a1a; font-size: 1.2rem; font-weight: 800; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <span class="brand-import" style="color: #ffffff;">IMPORTADORA</span>
+                    <span class="brand-name" style="color: #cc0000;">CALI</span>
+                </a>
+                <p class="subtitle" style="color: #999; font-weight: 600;">Repuestos Pesados</p>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar pulmones, filtros, globos...">
+                <button type="button" id="searchBtn" style="background: #cc0000; color: white; border: none; font-weight: bold;"><i class="fa-solid fa-magnifying-glass"></i> BUSCAR</button>
+            </div>
+
+            <div class="header-contact">
+                <a href="https://wa.me/59167100834" target="_blank" class="btn-whatsapp-header" style="background: #25d366; color: white; padding: 12px 25px; border-radius: 50px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(37,211,102,0.3);">
+                    <i class="fa-brands fa-whatsapp"></i> Cotizar Ahora
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="index.html" class="active">Inicio</a>
+            <a href="catalogo.html">Catálogo Completo</a>
+            <a href="contacto.html">Contactos y Sucursales</a>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <!-- AQUÍ ESTÁ LA SOLUCIÓN DEL TÍTULO INVISIBLE (Letra blanca) -->
+            <div class="sidebar-title" style="color: #ffffff; font-weight: 900; font-size: 1.2rem; padding: 12px; text-align: center; margin-bottom: 0;">CATEGORÍAS</div>
+            
+            <ul class="category-list" style="list-style: none; padding: 0;">
+                <li><a href="catalogo.html" style="color: #1a1a1a; text-decoration: none; display: block; padding: 10px 15px; border-bottom: 1px solid #eee;"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000; margin-right: 8px;"></i> Globos de Aire</a></li>
+                <li><a href="catalogo.html" style="color: #1a1a1a; text-decoration: none; display: block; padding: 10px 15px; border-bottom: 1px solid #eee;"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000; margin-right: 8px;"></i> Chatas</a></li>
+                <li><a href="catalogo.html" style="color: #1a1a1a; text-decoration: none; display: block; padding: 10px 15px; border-bottom: 1px solid #eee;"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000; margin-right: 8px;"></i> Pulmones de Freno</a></li>
+                <li><a href="catalogo.html" style="color: #1a1a1a; text-decoration: none; display: block; padding: 10px 15px; border-bottom: 1px solid #eee;"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000; margin-right: 8px;"></i> Amortiguadores</a></li>
+                <li><a href="catalogo.html" style="color: #1a1a1a; text-decoration: none; display: block; padding: 10px 15px; border-bottom: 1px solid #eee;"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000; margin-right: 8px;"></i> Filtros de Aire</a></li>
+                <li><a href="catalogo.html" style="color: #1a1a1a; text-decoration: none; display: block; padding: 10px 15px; border-bottom: 1px solid #eee;"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000; margin-right: 8px;"></i> Pastillas de Freno</a></li>
+                <li><a href="catalogo.html" style="color: #1a1a1a; text-decoration: none; display: block; padding: 10px 15px; border-bottom: 1px solid #eee;"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000; margin-right: 8px;"></i> Reparos</a></li>
+                <li><a href="catalogo.html" style="color: #cc0000; font-weight: bold; text-decoration: none; display: block; padding: 15px; margin-top: 5px;"><i class="fa-solid fa-arrow-right-long" style="margin-right: 8px;"></i> Mostrar Todo el Catálogo</a></li>
+                
+                <section class="seccion-marcas" style="margin-top: 35px;">
+                    <!-- TAMBIÉN CORREGÍ EL TÍTULO DE MARCAS A BLANCO -->
+                    <div class="sidebar-title" style="color: #ffffff; font-weight: 800; font-size: 1rem; padding: 10px; text-align: center; margin-bottom: 15px;">NUESTRAS MARCAS</div>
+                    <div class="marcas-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 10px;">
+                        <img src="img/marcas/breiter.png" alt="Breiter" style="width: 100%; border: 1px solid #eaeaea; border-radius: 6px; padding: 5px;">
+                        <img src="img/marcas/lionpower.jpg" alt="Lionpower" style="width: 100%; border: 1px solid #eaeaea; border-radius: 6px; padding: 5px;">
+                        <img src="img/marcas/sachs.jpg" alt="Sachs" style="width: 100%; border: 1px solid #eaeaea; border-radius: 6px; padding: 5px;">
+                        <img src="img/marcas/volvo.jpg" alt="Volvo" style="width: 100%; border: 1px solid #eaeaea; border-radius: 6px; padding: 5px;">
+                    </div>
+                </section>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+            
+            <!-- EL BANNER IDÉNTICO A TU IMAGEN CON LA LUZ CORREGIDA -->
+            <section class="hero-banner">
+                <div class="banner-text">
+                    <h2>GRANDES REPUESTOS PARA GRANDES DESAFÍOS</h2>
+                    <p>Importación directa de repuestos de alta durabilidad para Volvo,FH, Samurai y<br>líneas pesadas.</p>
+                    <a href="catalogo.html" class="btn-banner">Ver Catálogo</a>
+                </div>
+            </section>
+
+            <section class="seccion-nosotros" style="margin-bottom: 70px;">
+                <div class="nosotros-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+                    <div class="nosotros-texto">
+                        <h2 style="font-size: 2.2rem; color: #1a1a1a; font-weight: 900; margin-bottom: 10px;">Conoce Nuestra Tienda</h2>
+                        <div style="background-color: #cc0000; height: 5px; width: 80px; margin-bottom: 25px; border-radius: 5px;"></div>
+                        <p style="color: #555; font-size: 1.15rem; line-height: 1.7; margin-bottom: 30px;">En <strong>Importadora Cali</strong> somos importadores directos de las marcas más robustas del mercado mundial. Garantizamos la máxima calidad y el precio más competitivo para mantener tu flota siempre en movimiento.</p>
+                        <a href="contacto.html" class="btn-rojo">Visitar Sucursales</a>
+                    </div>
+                    <div class="nosotros-video">
+    <video id="videoPromo" autoplay muted playsinline class="video-estilizado" poster="img/foto-portada.jpg">
+        <source src="videos/videotienda.mp4" type="video/mp4">
+    </video>
+</div>
+                </div>
+            </section>
+
+            <section class="products-section">
+                <h3 class="section-title">ÚLTIMOS INGRESOS</h3>
+                <div class="products-grid" id="carruselNuevosIngresos">
+                    <div style="padding: 80px; grid-column: 1 / -1; text-align: center; color: #cc0000;">
+                        <i class="fa-solid fa-gear fa-spin" style="font-size: 3rem; margin-bottom: 20px; display: block;"></i>
+                        <span style="font-weight: 800; font-size: 1.2rem; letter-spacing: 1px;">Sincronizando inventario en tiempo real...</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="guia-compra">
+                <div class="paso">
+                    <i class="fa-solid fa-desktop"></i>
+                    <h4>1. Busca tu repuesto</h4>
+                    <p style="color: #666; margin-top: 10px; font-size: 0.9rem;">Usa nuestro buscador inteligente.</p>
+                </div>
+                <div class="paso">
+                    <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>
+                    <h4>2. Cotiza al instante</h4>
+                    <p style="color: #666; margin-top: 10px; font-size: 0.9rem;">Atención personalizada por WhatsApp.</p>
+                </div>
+                <div class="paso">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <h4>3. Recibe en tu ciudad</h4>
+                    <p style="color: #666; margin-top: 10px; font-size: 0.9rem;">Envíos seguros a nivel nacional.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer" style="background: #0a0c10; color: #aaa; text-align: center; padding: 40px 20px; margin-top: 60px; border-top: 4px solid #cc0000;">
+        <h2 style="color: white; font-size: 1.5rem; margin-bottom: 10px; font-weight: 900;">IMPORTADORA <span style="color: #cc0000;">CALI</span></h2>
+        <p style="font-size: 0.9rem;">© 2026 - Todos los derechos reservados.</p>
+    </footer>
+
+    <a href="https://wa.me/59167100834" class="whatsapp-flotante" target="_blank" style="position: fixed; bottom: 30px; right: 30px; z-index: 1000; transition: transform 0.3s;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 70px; height: 70px; filter: drop-shadow(0 6px 15px rgba(37,211,102,0.4));">
+    </a>
+
+    <script>
+        const API_WEB_URL = 'https://script.google.com/macros/s/AKfycbw50sxl6xw-46zQ6BasPDLHltXDi1-AF_RWR2N3rGhkyMlcqTLlymYMgC-DBXi_foM/exec';
+        let inventario = [];
+
+        async function cargarDatosDesdeSheets() {
+            if (!navigator.onLine) {
+                cargarRespaldoLocal();
+                return;
+            }
+            try {
+                const respuesta = await fetch(API_WEB_URL, { method: 'GET', mode: 'cors', redirect: 'follow' });
+                if (respuesta.ok) {
+                    const datosJson = await respuesta.json();
+                    if (datosJson && datosJson.length > 0) {
+                        guardarRespaldoLocal(datosJson);
+                        procesarDatos(datosJson);
+                        return;
+                    }
+                }
+                throw new Error("Forzando Plan B");
+            } catch (error) {
+                ejecutarPlanB_JSONP();
+            }
+        }
+
+        function ejecutarPlanB_JSONP() {
+            const viejoScript = document.getElementById('jsonp-engine');
+            if (viejoScript) viejoScript.remove();
+            const script = document.createElement('script');
+            script.id = 'jsonp-engine';
+            script.src = API_WEB_URL + '?callback=recibirDatos&nocache=' + new Date().getTime();
+            script.onerror = function() { cargarRespaldoLocal(); };
+            document.body.appendChild(script);
+        }
+
+        function recibirDatos(datosJson) {
+            guardarRespaldoLocal(datosJson);
+            procesarDatos(datosJson);
+        }
+
+        function guardarRespaldoLocal(datosJson) {
+            localStorage.setItem('respaldoInventarioCali', JSON.stringify(datosJson));
+        }
+
+        function cargarRespaldoLocal() {
+            const datosGuardados = localStorage.getItem('respaldoInventarioCali');
+            if (datosGuardados) {
+                procesarDatos(JSON.parse(datosGuardados));
+            }
+        }
+
+        function procesarDatos(datosJson) {
+            if (!datosJson || datosJson.length === 0) return;
+            inventario = datosJson.map(p => {
+                return {
+                    desc: p.desc ? String(p.desc).trim() : 'SIN DESCRIPCIÓN',
+                    marca: p.marca ? String(p.marca).toUpperCase().trim() : 'SIN MARCA',
+                    img: p.img ? String(p.img).trim() : ''
+                };
+            });
+            rotarProductos(); 
+        }
+
+        function rotarProductos() {
+            const grid = document.getElementById('carruselNuevosIngresos');
+            if (!inventario || inventario.length === 0) return;
+
+            const productosNuevos = inventario.filter(p => p.marca === "LIONPOWER" || p.marca === "OUJUN");
+            
+            if (productosNuevos.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">No hay nuevos ingresos por el momento.</p>';
+                return;
+            }
+
+            const inventarioMezclado = [...productosNuevos].sort(() => 0.5 - Math.random());
+            const productosSeleccionados = inventarioMezclado.slice(0, 6);
+
+            const tarjetasHTML = productosSeleccionados.map(p => `
+                <div class="product-card-clean">
+                    <span class="badge-new">¡NUEVO!</span>
+                    <div class="img-container">
+                        <img src="${p.img && p.img.startsWith('http') ? p.img : 'https://via.placeholder.com/300x300?text=Sin+Imagen'}" alt="${p.desc}" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <h3>${p.desc}</h3>
+                        <a href="catalogo.html" class="btn-catalogo">Ver en Catálogo</a>
+                    </div>
+                </div>
+            `).join('');
+
+            grid.innerHTML = tarjetasHTML;
+        }
+
+        window.onload = () => {
+            cargarDatosDesdeSheets();
+            setInterval(rotarProductos, 6000);
+        };
+    </script>
+  <script>
+    const reproductor = document.getElementById('videoPromo');
+    
+    // Rutas exactas a tu carpeta 'videos'
+    const listaVideos = [
+        'videos/videotienda.mp4',
+        'videos/videotienda2.mp4',
+        'videos/video3.mp4',
+        'videos/video4.mp4'
+    ];
+    
+    // Empezamos en el índice 0 (videotienda.mp4) que es el que carga el HTML primero
+    let videoActual = 0; 
+
+    reproductor.addEventListener('ended', function() {
+        videoActual++;
+        
+        if (videoActual >= listaVideos.length) {
+            videoActual = 0;
+        }
+        
+        reproductor.src = listaVideos[videoActual];
+        reproductor.play();
+    });
+</script>
+</body>
+</html>

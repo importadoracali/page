@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Repuestos | Importadora Cali</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="brand-import">IMPORTADORA</span>
+                    <span class="brand-name">CALI</span>
+                </a>
+                <p class="subtitle">Repuestos Pesados</p>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="¿Qué repuesto buscas hoy?">
+                <button type="button" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i> BUSCAR</button>
+            </div>
+            <div class="header-contact">
+                </div>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="index.html">Inicio</a>
+            <a href="catalogo.html" class="active">Catálogo Completo</a>
+            <a href="contacto.html">Contacto y Sucursales</a>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">CATEGORÍAS</div>
+            <ul class="category-list">
+                <li><a href="#" onclick="filtrarPorDescripcion('GLOBO')"><i class="fa-solid fa-circle-chevron-right"></i> Globos de Aire</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('CHATA')"><i class="fa-solid fa-circle-chevron-right"></i> Chatas</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('CÁMARA')"><i class="fa-solid fa-circle-chevron-right"></i> Pulmones de Freno</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('AMORTIGUADOR')"><i class="fa-solid fa-circle-chevron-right"></i> Amortiguadores</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('FILTRO')"><i class="fa-solid fa-circle-chevron-right"></i> Filtros de Aire</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('PASTILLA')"><i class="fa-solid fa-circle-chevron-right"></i> Pastillas de Freno</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('REPARO')"><i class="fa-solid fa-circle-chevron-right"></i> Reparos</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('')" style="color: #cc0000; margin-top: 10px;"><i class="fa-solid fa-rotate-left"></i> Mostrar Todos</a></li>
+            </ul>
+        </aside>
+
+        <main class="content-area">
+            <section class="products-section">
+                <h3 class="section-title">NUESTRO CATÁLOGO COMPLETO</h3>
+                <p style="margin-bottom: 20px; color: #666;">Selecciona un producto para ver el detalle y cotizar.</p>
+                
+                <div class="products-grid" id="catalogoGrid">
+                    <div style="padding: 40px; grid-column: 1 / -1; text-align: center; color: #cc0000;">
+                        <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                        Sincronizando con el inventario...
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; <span id="year">2026</span> Importadora Cali - Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        const API_WEB_URL = 'https://script.google.com/macros/s/AKfycbw50sxl6xw-46zQ6BasPDLHltXDi1-AF_RWR2N3rGhkyMlcqTLlymYMgC-DBXi_foM/exec';
+        let inventario = [];
+
+        // 1. Descarga desde Google Sheets o Respaldo
+        async function cargarDatosDesdeSheets() {
+            if (!navigator.onLine) {
+                cargarRespaldoLocal();
+                return;
+            }
+
+            try {
+                const respuesta = await fetch(API_WEB_URL, {
+                    method: 'GET',
+                    mode: 'cors',
+                    redirect: 'follow'
+                });
+                
+                if (respuesta.ok) {
+                    const datosJson = await respuesta.json();
+                    if (datosJson && datosJson.length > 0) {
+                        guardarRespaldoLocal(datosJson);
+                        procesarDatos(datosJson);
+                        return;
+                    }
+                }
+                throw new Error("Forzando alternativa");
+                
+            } catch (error) {
+                ejecutarPlanB_JSONP();
+            }
+        }
+
+        function ejecutarPlanB_JSONP() {
+            const viejoScript = document.getElementById('jsonp-engine');
+            if (viejoScript) viejoScript.remove();
+
+            const script = document.createElement('script');
+            script.id = 'jsonp-engine';
+            script.src = API_WEB_URL + '?callback=recibirDatos&nocache=' + new Date().getTime();
+            
+            script.onerror = function() {
+                cargarRespaldoLocal();
+            };
+            document.body.appendChild(script);
+        }
+
+        function recibirDatos(datosJson) {
+            guardarRespaldoLocal(datosJson);
+            procesarDatos(datosJson);
+        }
+
+        function guardarRespaldoLocal(datosJson) {
+            localStorage.setItem('respaldoInventarioCali', JSON.stringify(datosJson));
+        }
+
+        function cargarRespaldoLocal() {
+            const datosGuardados = localStorage.getItem('respaldoInventarioCali');
+            if (datosGuardados) {
+                procesarDatos(JSON.parse(datosGuardados));
+            } else {
+                document.getElementById('catalogoGrid').innerHTML = '<p style="color: #cc0000; padding: 20px; grid-column: 1 / -1; text-align: center;">No hay conexión a internet y no existe un respaldo previo.</p>';
+            }
+        }
+
+        // 2. Procesamiento de los datos (Mantiene el código internamente para la búsqueda)
+        function procesarDatos(datosJson) {
+            if (!datosJson || datosJson.length === 0) return;
+
+            inventario = datosJson.map(p => {
+                return {
+                    codCali: p.codCali ? String(p.codCali).trim() : '---',
+                    desc: p.desc ? String(p.desc).trim() : 'SIN DESCRIPCIÓN',
+                    marca: p.marca ? String(p.marca).toUpperCase().trim() : 'SIN MARCA',
+                    img: p.img ? String(p.img).trim() : ''
+                };
+            });
+            
+            mostrarCatalogoLimpio();
+        }
+
+        // 3. Renderizado de Tarjetas (Visualmente limpias, sin precio ni código)
+        function mostrarCatalogoLimpio(listaProductos = inventario) {
+            const grid = document.getElementById('catalogoGrid');
+            
+            if (listaProductos.length === 0) {
+                grid.innerHTML = '<p style="color: #666; padding: 40px; font-size: 1.1rem; grid-column: 1 / -1; text-align: center;">No se encontraron repuestos con esa búsqueda.</p>';
+                return;
+            }
+            
+            const tarjetasHTML = listaProductos.map(p => `
+                <div class="product-card" style="border: 1px solid #eee; border-radius: 8px; overflow: hidden; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
+                    <div style="height: 220px; display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-bottom: 2px solid #cc0000;">
+                        <img src="${p.img && p.img.startsWith('http') ? p.img : 'https://via.placeholder.com/300x300?text=Sin+Imagen'}" alt="${p.desc}" style="max-width: 100%; max-height: 100%; object-fit: contain;" loading="lazy">
+                    </div>
+                    <div style="padding: 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                        <div>
+                            <h3 style="font-size: 1.1rem; color: #1a1a1a; margin-bottom: 15px; line-height: 1.4; text-transform: uppercase;">${p.desc}</h3>
+                            <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px; text-transform: uppercase;">Marca: <span style="background: #fff0f0; padding: 4px 8px; border-radius: 4px; color: #cc0000; font-weight: bold;">${p.marca}</span></p>
+                        </div>
+                        
+                        <button style="width: 100%; background: #cc0000; color: white; border: 2px solid #cc0000; padding: 12px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s;">COTIZAR</button>
+                    </div>
+                </div>
+            `).join('');
+
+            grid.innerHTML = tarjetasHTML;
+        }
+
+        // 4. Búsqueda Inteligente (Busca por descripción, marca O código oculto)
+        function filtrarPorDescripcion(palabraBuscada) {
+            if(event) event.preventDefault();
+
+            const filtrados = inventario.filter(p => 
+                p.desc.toLowerCase().includes(palabraBuscada.toLowerCase()) || 
+                p.marca.toLowerCase().includes(palabraBuscada.toLowerCase()) ||
+                p.codCali.toLowerCase().includes(palabraBuscada.toLowerCase())
+            );
+            
+            mostrarCatalogoLimpio(filtrados);
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            filtrarPorDescripcion(e.target.value);
+        });
+
+        // 5. Arranque
+        window.onload = () => {
+            cargarDatosDesdeSheets();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,687 @@
+/* VARIABLES DE DISEÑO (Colores y fuentes estilo Maquinaria Pesada) */
+:root {
+    --color-principal: #cc0000; /* Rojo industrial (antes naranja) */
+    --naranja-cali: #cc0000;    /* Mantenemos el nombre de la variable para no romper el HTML, pero pintará en rojo */
+    --color-oscuro: #1a1a1a;    
+    --color-texto: #333333;     
+    --color-gris-claro: #f4f4f4;
+    --fuente-sistema: Arial, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fuente-sistema);
+    background-color: #fafafa;
+    color: var(--color-texto);
+}
+
+/* ENCABEZADO (HEADER) */
+.header {
+    background-color: var(--color-oscuro);
+    color: white;
+    padding: 15px 0;
+    border-bottom: 4px solid var(--color-principal);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo a {
+    text-decoration: none;
+}
+
+.brand-import {
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--color-principal);
+}
+
+.logo .subtitle {
+    font-size: 11px;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: -3px;
+}
+
+/* BARRA DE BÚSQUEDA (Estilo exacto a la imagen) */
+.search-box {
+    display: flex;
+    width: 55%;
+}
+
+.search-box input {
+    width: 80%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-box button {
+    width: 20%;
+    background-color: var(--color-principal);
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    transition: background 0.2s;
+}
+
+.search-box button:hover {
+    background-color: #e05d00;
+}
+
+/* BOTÓN WHATSAPP HEADER */
+.btn-whatsapp-header {
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-whatsapp-header:hover {
+    background-color: #1ebd54;
+}
+
+/* BARRA DE NAVEGACIÓN PRINCIPAL */
+.nav-bar {
+    background-color: #2b2b2b;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.nav-container a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.nav-container a:hover, .nav-container a.active {
+    background-color: var(--color-principal);
+}
+
+/* DISTRIBUCIÓN (MAQUETA DE DOS COLUMNAS) */
+.main-layout {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+/* BARRA LATERAL (SIDEBAR) */
+.sidebar {
+    width: 22%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    align-self: flex-start;
+}
+
+.sidebar-title {
+    background-color: var(--color-principal);
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 3px 3px 0 0;
+}
+
+.category-list {
+    list-style: none;
+}
+
+.category-list li {
+    border-bottom: 1px solid #eee;
+}
+
+.category-list li a {
+    display: block;
+    padding: 12px;
+    color: #444;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.category-list li a i {
+    font-size: 11px;
+    margin-right: 5px;
+    color: var(--color-principal);
+}
+
+.category-list li a:hover {
+    background-color: var(--color-gris-claro);
+    padding-left: 18px;
+}
+
+/* CONTENIDO DE LA PÁGINA */
+.content-area {
+    width: 78%;
+}
+
+/* BANNER PRINCIPAL */
+.hero-banner {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&q=80&w=1000') no-repeat center center/cover;
+    height: 250px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.banner-text h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: var(--color-principal);
+}
+
+.banner-text p {
+    font-size: 14px;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+.btn-banner {
+    display: inline-block;
+    background-color: var(--color-principal);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* CUADRÍCULA DE PRODUCTOS */
+.section-title {
+    font-size: 16px;
+    border-bottom: 2px solid var(--color-oscuro);
+    padding-bottom: 5px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.badge-new {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #007bff;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 3px 7px;
+    border-radius: 3px;
+}
+
+.product-img img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.product-info h4 {
+    font-size: 14px;
+    color: var(--color-oscuro);
+    margin-bottom: 6px;
+    min-height: 40px;
+}
+
+.compatibility {
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 12px;
+}
+
+.btn-quote {
+    display: block;
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.btn-quote:hover {
+    background-color: #1ebd54;
+}
+
+/* PÁGINA CONTACTO */
+.contacto-content {
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.contacto-content h2 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--color-principal);
+    padding-bottom: 10px;
+}
+
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.info-card h3 {
+    font-size: 16px;
+    color: var(--color-principal);
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.placeholder-map {
+    background-color: #eee;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* PIE DE PÁGINA */
+.footer {
+    background-color: var(--color-oscuro);
+    color: #999;
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    margin-top: 40px;
+    border-top: 3px solid var(--color-principal);
+}
+
+.flex-column { flex-direction: column; }
+/* ESTILOS PARA LA SECCIÓN DEL VIDEO */
+.video-section {
+    margin-bottom: 30px;
+}
+
+.video-container {
+    width: 100%;
+    max-width: 800px; /* Tamaño máximo del video */
+    margin: 0 auto;   /* Centrar el video */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra elegante */
+    border: 2px solid var(--color-oscuro);
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+/* Estilos generales para mejorar la estética */
+:root {
+    --naranja-cali: #ff6600;
+    --negro-cali: #1a1a1a;
+    --gris-claro: #f4f4f4;
+}
+
+.linea-naranja {
+    width: 60px;
+    height: 4px;
+    background-color: var(--naranja-cali);
+    margin: 10px 0 20px 0;
+    border-radius: 2px;
+}
+.linea-naranja.centro { margin: 10px auto 30px auto; }
+
+/* SECCIÓN NOSOTROS Y VIDEO */
+.seccion-nosotros {
+    padding: 40px 20px;
+    background-color: white;
+}
+.nosotros-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.nosotros-texto h2 { font-size: 28px; color: var(--negro-cali); }
+.nosotros-texto p { font-size: 16px; color: #555; line-height: 1.6; margin-bottom: 15px; }
+
+.btn-naranja {
+    display: inline-block;
+    background-color: var(--naranja-cali);
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+.btn-naranja:hover { background-color: #cc5200; }
+
+.video-estilizado {
+    width: 100%;           /* Ocupa todo el ancho disponible en su columna */
+    aspect-ratio: 16 / 11;  /* Fuerza un tamaño rectangular perfecto (como una pantalla de TV) */
+    object-fit: cover;     /* LA MAGIA: Llena la caja sin deformar la imagen */
+    border-radius: 8px;    /* Bordes ligeramente redondeados (opcional, se ve más moderno) */
+    background-color: #0a0c10; /* ponemos el fondo oscuro si es que un sistema se tarda en cargar */
+}
+
+/* SECCIÓN SUCURSALES (MAPAS) */
+.seccion-sucursales {
+    padding: 50px 20px;
+    background-color: var(--gris-claro);
+    text-align: center;
+}
+.botones-ciudad {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.btn-ciudad {
+    background-color: white;
+    color: var(--negro-cali);
+    border: 2px solid var(--negro-cali);
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px; /* Botones estilo pastilla */
+    cursor: pointer;
+    transition: 0.3s;
+}
+.btn-ciudad:hover, .btn-ciudad.activo {
+    background-color: var(--negro-cali);
+    color: white;
+}
+
+.mapas-contenedor {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.mapa-item {
+    display: none; /* Ocultos por defecto */
+}
+
+
+.mapa-item.activo {
+    display: block; /* Muestra solo el activo */
+    animation: fadeIn 0.5s ease;
+}
+.info-sucursal {
+    text-align: left;
+    margin-bottom: 15px;
+}
+.info-sucursal h3 { color: var(--naranja-cali); margin-bottom: 5px; }
+
+/* Hacerlo responsive (para celulares) */
+@media (max-width: 768px) {
+    .nosotros-grid { grid-template-columns: 1fr; }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.whatsapp-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    border-radius: 50%;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: transform 0.3s;
+}
+.whatsapp-flotante img { width: 35px; }
+.whatsapp-flotante:hover { transform: scale(1.1); }
+.barra-confianza {
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--negro-cali);
+    color: white;
+    padding: 15px 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.item-confianza {
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.item-confianza span { font-size: 20px; color: var(--naranja-cali); }
+.seccion-marcas { padding: 30px 20px; background: white; text-align: center; }
+.titulo-marcas { margin-bottom: 20px; color: #555; font-size: 18px; }
+.marcas-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.7; }
+.marcas-grid img { height: 50px; filter: grayscale(100%); transition: 0.3s; }
+.marcas-grid img:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+.guia-compra { 
+    display: grid; grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; padding: 30px; background: #f9f9f9; 
+    border-radius: 8px; margin: 20px 0; text-align: center; 
+}
+.paso i { font-size: 30px; color: var(--color-principal); margin-bottom: 10px; }
+.paso h4 { font-size: 16px; margin-bottom: 5px; }
+.paso p { font-size: 13px; color: #666; }
+/* --- SECCIÓN ÚLTIMOS INGRESOS --- */
+.products-section {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #ff6a00; /* Naranja/Rojo de tu marca */
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background-color: #12141c; /* Fondo oscuro elegante */
+    border: 1px solid #222533;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 106, 0, 0.2);
+    border-color: #ff6a00;
+}
+
+.badge-new {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #ff1e1e;
+    color: #fff;
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 900;
+    border-radius: 20px;
+    z-index: 10;
+    letter-spacing: 1px;
+}
+
+.product-img-wrapper {
+    width: 100%;
+    height: 220px;
+    background-color: #ffffff; /* Fondo blanco para que los repuestos resalten limpios */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-img-wrapper img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain; /* Evita que la imagen se deforme */
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-img-wrapper img {
+    transform: scale(1.1); /* Efecto zoom increíble al pasar el mouse */
+}
+
+.product-info {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.product-info h4 {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.4;
+}
+
+.btn-quote {
+    display: inline-block;
+    background: #25D366; /* Verde WhatsApp */
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.btn-quote:hover {
+    background: #128C7E;
+}
+/* Agrega esto a tu CSS */
+.paso, .product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.paso:hover {
+    transform: translateY(-8px);
+    color: #ff6a00;
+}
+/* Animación de aparición suave para la rotación de productos */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* nuevo boton corporativo para las tarjetas (reemplaza al verde de WhatsApp) */
+.btn-rojo-card {
+    display: block;
+    background-color: #ffffff;
+    color: #ff1e1e;
+    border: 2px solid #ff1e1e;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.btn-rojo-card:hover {
+    background-color: #ff1e1e;
+    color: #ffffff;
+}

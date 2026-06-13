@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto y Ubicación | Importadora Cali</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <span class="brand-import">IMPORTADORA</span>
+                    <span class="brand-name">CALI</span>
+                </a>
+                <p class="subtitle">Repuestos Pesados</p>
+            </div>
+            <div class="header-contact">
+                <a href="https://wa.me/59167100834" target="_blank" class="btn-whatsapp-header">
+                    <i class="fa-brands fa-whatsapp"></i> Chat Directo
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="index.html">Inicio</a>
+            <a href="catalogo.html">Catálogo Completo</a>
+            <a href="contacto.html" class="active">Contacto y Sucursales</a>
+        </div>
+    </nav>
+
+    <div class="main-layout flex-column">
+        <main class="contacto-content">
+            <h2 style="text-align: center; border-bottom: none; margin-bottom: 0;">Nuestras Sucursales</h2>
+            <div class="linea-naranja centro"></div>
+            <p style="text-align: center; margin-bottom: 30px; color: #555;">Selecciona tu ciudad para ver la información y ubicación exacta.</p>
+
+            <div class="botones-ciudad">
+                <button class="btn-ciudad activo" onclick="cambiarCiudad('cochabamba', this)">Cochabamba</button>
+                <button class="btn-ciudad" onclick="cambiarCiudad('lapaz', this)">La Paz</button>
+            </div>
+
+            <div class="mapas-contenedor" style="box-shadow: none; padding: 0;">
+                
+                <div id="mapa-cochabamba" class="mapa-item activo">
+                    <div class="contacto-grid">
+                        <div class="info-card">
+                            <h3><i class="fa-solid fa-location-dot"></i> Sucursal Cochabamba </h3>
+                            <p>Quillacollo av.Alvina Patiño Kilometro 14, Cochabamba</p>
+                            
+                            <h3><i class="fa-solid fa-clock"></i> Horarios de Atención</h3>
+                            <p>Lunes a Sábado: 8:30 AM - 6:30 PM</p>
+                            
+                            <h3><i class="fa-solid fa-phone"></i> Teléfonos y Ventas</h3>
+                            <p>Celular WhatsApp: +591 67100834</p>
+                        </div>
+
+                        <div class="map-card">
+                            <h3>Encuéntranos en el Mapa</h3>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d951.8403382970566!2d-66.28842708711338!3d-17.39443779934995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e30b7bf247bc8b%3A0xbb3549689b244b2d!2sQuillacollo!5e0!3m2!1ses!2sbo!4v1779669443049!5m2!1ses!2sbo" width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mapa-lapaz" class="mapa-item">
+                    <div class="contacto-grid">
+                        <div class="info-card">
+                            <h3><i class="fa-solid fa-location-dot"></i> Sucursal La Paz(Sede Principal)</h3>
+                            <p>Av. 6 de Marzo,Puente Bolivia,El Alto, La Paz</p>
+                            
+                            <h3><i class="fa-solid fa-clock"></i> Horarios de Atención</h3>
+                            <p>Lunes a Sábado: 8:30 AM - 6:30 PM</p>
+                            
+                            <h3><i class="fa-solid fa-phone"></i> Teléfonos y Ventas</h3>
+                            <p>Celular WhatsApp: +591 67100834</p>
+                        </div>
+
+                        <div class="map-card">
+                            <h3>Encuéntranos en el Mapa</h3>
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d478.0818187423297!2d-68.17753639541195!3d-16.54352867924387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915edf002e69d36b%3A0xe346ab56886df2f6!2sIMPORTADORA%20CALI!5e0!3m2!1ses!2sbo!4v1779669294710!5m2!1ses!2sbo" width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; <span id="year">2026</span> Importadora Cali - Todos los derechos reservados.</p>
+        <p>Catálogo Digital sin cuentas - Consulta directa vía WhatsApp</p>
+    </footer>
+
+    <a href="https://wa.me/59167100834" class="whatsapp-flotante" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <script src="js/main.js"></script>
+    <script>
+        // SCRIPT PARA INTERCAMBIAR MAPAS
+        function cambiarCiudad(ciudadId, elementoBoton) {
+            var mapas = document.querySelectorAll('.mapa-item');
+            mapas.forEach(function(mapa) {
+                mapa.classList.remove('activo');
+            });
+
+            var botones = document.querySelectorAll('.btn-ciudad');
+            botones.forEach(function(btn) {
+                btn.classList.remove('activo');
+            });
+
+            document.getElementById('mapa-' + ciudadId).classList.add('activo');
+            elementoBoton.classList.add('activo');
+        }
+    </script>
+</body>
+</html>
