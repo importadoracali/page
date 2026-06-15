@@ -6,6 +6,77 @@
     <title>Catálogo de Repuestos | Importadora Cali</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           ESTILOS BASE Y ESTRUCTURA
+           ========================================= */
+        body { font-family: sans-serif; margin: 0; background-color: #f4f4f4; color: #333; }
+        
+        .header { background: #1a1a1a; padding: 15px 30px; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; flex-wrap: wrap; gap: 15px; }
+        .logo a { text-decoration: none; }
+        .brand-import { color: #ffffff; font-weight: bold; font-size: 1.2rem; }
+        .brand-name { color: #cc0000; font-weight: 900; font-size: 1.2rem; }
+        .subtitle { color: #999; font-weight: 600; margin: 0; font-size: 0.85rem; }
+        
+        .search-box { display: flex; gap: 5px; flex-grow: 1; max-width: 500px; justify-content: center; }
+        .search-box input { width: 100%; padding: 10px; border: none; border-radius: 4px; }
+        .search-box button { background: #cc0000; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .search-box button:hover { background: #a30000; }
+
+        .nav-bar { background: #cc0000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .nav-container { display: flex; justify-content: center; flex-wrap: wrap; max-width: 1400px; margin: 0 auto; }
+        .nav-container a { color: white; padding: 15px 20px; text-decoration: none; font-weight: 500; transition: 0.3s; text-align: center; }
+        .nav-container a:hover, .nav-container a.active { background: #a30000; font-weight: bold; }
+
+        .main-layout { display: flex; gap: 30px; padding: 30px; max-width: 1400px; margin: 0 auto; align-items: flex-start; }
+        
+        /* =========================================
+           SIDEBAR Y PRODUCTOS
+           ========================================= */
+        .sidebar { background: #ffffff; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); width: 250px; flex-shrink: 0; overflow: hidden; }
+        .sidebar-title { background: #1a1a1a; color: #ffffff; font-weight: 900; font-size: 1.2rem; padding: 15px; text-align: center; margin-bottom: 0; }
+        .category-list { list-style: none; padding: 0; margin: 0; }
+        .category-list a { color: #1a1a1a; text-decoration: none; display: block; padding: 12px 15px; border-bottom: 1px solid #eee; transition: all 0.2s ease; }
+        .category-list a:hover { padding-left: 20px; color: #cc0000; background-color: #f9f9f9; }
+
+        .content-area { flex-grow: 1; min-width: 0; }
+        .section-title { color: #1a1a1a; font-weight: 900; font-size: 1.8rem; margin-top: 0; margin-bottom: 10px; text-transform: uppercase; }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        .footer { background: #0a0c10; color: #aaa; text-align: center; padding: 30px 20px; margin-top: 40px; border-top: 4px solid #cc0000; }
+
+        /* =========================================
+           DISEÑO RESPONSIVO (MÓVILES Y TABLETS)
+           ========================================= */
+        @media (max-width: 992px) {
+            .main-layout { flex-direction: column; padding: 15px; }
+            .sidebar { width: 100%; }
+            .category-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+        }
+
+        @media (max-width: 768px) {
+            .header-container { flex-direction: column; text-align: center; padding: 15px; }
+            .search-box { width: 100%; max-width: 100%; }
+            .nav-container a { flex-grow: 1; padding: 12px 10px; font-size: 0.9rem; }
+            
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); }
+            .category-list { grid-template-columns: 1fr 1fr; } /* Dos columnas de categorías en móvil */
+        }
+        
+        @media (max-width: 480px) {
+            .category-list { grid-template-columns: 1fr; } /* Una sola columna si la pantalla es muy pequeña */
+            .section-title { font-size: 1.5rem; text-align: center; }
+            .content-area p { text-align: center; }
+        }
+    </style>
 </head>
 <body>
 
@@ -23,7 +94,7 @@
                 <button type="button" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i> BUSCAR</button>
             </div>
             <div class="header-contact">
-                </div>
+            </div>
         </div>
     </header>
 
@@ -39,14 +110,14 @@
         <aside class="sidebar">
             <div class="sidebar-title">CATEGORÍAS</div>
             <ul class="category-list">
-                <li><a href="#" onclick="filtrarPorDescripcion('GLOBO')"><i class="fa-solid fa-circle-chevron-right"></i> Globos de Aire</a></li>
-                <li><a href="#" onclick="filtrarPorDescripcion('CHATA')"><i class="fa-solid fa-circle-chevron-right"></i> Chatas</a></li>
-                <li><a href="#" onclick="filtrarPorDescripcion('CÁMARA')"><i class="fa-solid fa-circle-chevron-right"></i> Pulmones de Freno</a></li>
-                <li><a href="#" onclick="filtrarPorDescripcion('AMORTIGUADOR')"><i class="fa-solid fa-circle-chevron-right"></i> Amortiguadores</a></li>
-                <li><a href="#" onclick="filtrarPorDescripcion('FILTRO')"><i class="fa-solid fa-circle-chevron-right"></i> Filtros de Aire</a></li>
-                <li><a href="#" onclick="filtrarPorDescripcion('PASTILLA')"><i class="fa-solid fa-circle-chevron-right"></i> Pastillas de Freno</a></li>
-                <li><a href="#" onclick="filtrarPorDescripcion('REPARO')"><i class="fa-solid fa-circle-chevron-right"></i> Reparos</a></li>
-                <li><a href="#" onclick="filtrarPorDescripcion('')" style="color: #cc0000; margin-top: 10px;"><i class="fa-solid fa-rotate-left"></i> Mostrar Todos</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('GLOBO')"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000;"></i> Globos de Aire</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('CHATA')"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000;"></i> Chatas</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('CÁMARA')"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000;"></i> Pulmones de Freno</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('AMORTIGUADOR')"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000;"></i> Amortiguadores</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('FILTRO')"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000;"></i> Filtros de Aire</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('PASTILLA')"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000;"></i> Pastillas de Freno</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('REPARO')"><i class="fa-solid fa-circle-chevron-right" style="color: #cc0000;"></i> Reparos</a></li>
+                <li><a href="#" onclick="filtrarPorDescripcion('')" style="color: #cc0000; font-weight: bold; background: #fafafa;"><i class="fa-solid fa-rotate-left"></i> Mostrar Todos</a></li>
             </ul>
         </aside>
 
@@ -130,11 +201,11 @@
             if (datosGuardados) {
                 procesarDatos(JSON.parse(datosGuardados));
             } else {
-                document.getElementById('catalogoGrid').innerHTML = '<p style="color: #cc0000; padding: 20px; grid-column: 1 / -1; text-align: center;">No hay conexión a internet y no existe un respaldo previo.</p>';
+                document.getElementById('catalogoGrid').innerHTML = '<p style="color: #cc0000; padding: 20px; grid-column: 1 / -1; text-align: center; border: 1px solid #ffcccc; background: #fff0f0; border-radius: 8px;">No hay conexión a internet y no existe un respaldo previo almacenado en tu dispositivo.</p>';
             }
         }
 
-        // 2. Procesamiento de los datos (Mantiene el código internamente para la búsqueda)
+        // 2. Procesamiento de los datos 
         function procesarDatos(datosJson) {
             if (!datosJson || datosJson.length === 0) return;
 
@@ -150,35 +221,42 @@
             mostrarCatalogoLimpio();
         }
 
-        // 3. Renderizado de Tarjetas (Visualmente limpias, sin precio ni código)
+        // 3. Renderizado de Tarjetas
         function mostrarCatalogoLimpio(listaProductos = inventario) {
             const grid = document.getElementById('catalogoGrid');
             
             if (listaProductos.length === 0) {
-                grid.innerHTML = '<p style="color: #666; padding: 40px; font-size: 1.1rem; grid-column: 1 / -1; text-align: center;">No se encontraron repuestos con esa búsqueda.</p>';
+                grid.innerHTML = '<p style="color: #666; padding: 40px; font-size: 1.1rem; grid-column: 1 / -1; text-align: center; border: 1px dashed #ccc; border-radius: 8px;">No se encontraron repuestos con esa búsqueda.</p>';
                 return;
             }
             
-            const tarjetasHTML = listaProductos.map(p => `
-                <div class="product-card" style="border: 1px solid #eee; border-radius: 8px; overflow: hidden; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); display: flex; flex-direction: column;">
-                    <div style="height: 220px; display: flex; align-items: center; justify-content: center; background: #f8f9fa; border-bottom: 2px solid #cc0000;">
-                        <img src="${p.img && p.img.startsWith('http') ? p.img : 'https://via.placeholder.com/300x300?text=Sin+Imagen'}" alt="${p.desc}" style="max-width: 100%; max-height: 100%; object-fit: contain;" loading="lazy">
+            const tarjetasHTML = listaProductos.map(p => {
+                // Generar un mensaje para WhatsApp que incluya la descripción y el código de referencia (codCali)
+                const mensajeWa = `Hola, quisiera cotizar: ${encodeURIComponent(p.desc)} (Ref: ${encodeURIComponent(p.codCali)})`;
+                
+                return `
+                <div class="product-card" style="border: 1px solid #eee; border-radius: 8px; overflow: hidden; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.04); display: flex; flex-direction: column; transition: transform 0.3s, box-shadow 0.3s;">
+                    <div style="height: 220px; display: flex; align-items: center; justify-content: center; background: #ffffff; border-bottom: 1px solid #f5f5f5; padding: 15px;">
+                        <img src="${p.img && p.img.startsWith('http') ? p.img : 'https://via.placeholder.com/300x300?text=Sin+Imagen'}" alt="${p.desc}" style="max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s;" loading="lazy" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
                     </div>
-                    <div style="padding: 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
+                    <div style="padding: 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; text-align: center;">
                         <div>
-                            <h3 style="font-size: 1.1rem; color: #1a1a1a; margin-bottom: 15px; line-height: 1.4; text-transform: uppercase;">${p.desc}</h3>
-                            <p style="font-size: 0.85rem; color: #666; margin-bottom: 20px; text-transform: uppercase;">Marca: <span style="background: #fff0f0; padding: 4px 8px; border-radius: 4px; color: #cc0000; font-weight: bold;">${p.marca}</span></p>
+                            <h3 style="font-size: 1rem; color: #1a1a1a; margin-bottom: 15px; line-height: 1.5; font-weight: 800; text-transform: uppercase;">${p.desc}</h3>
+                            <div style="background: #f9f9f9; padding: 10px; border-radius: 6px; margin-bottom: 20px; text-align: left; font-size: 0.85rem; color: #555;">
+                                <strong>Marca:</strong> <span style="color:#cc0000; font-weight:bold;">${p.marca}</span>
+                            </div>
                         </div>
                         
-                        <button style="width: 100%; background: #cc0000; color: white; border: 2px solid #cc0000; padding: 12px; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s;">COTIZAR</button>
+                        <a href="https://wa.me/59176248792?text=${mensajeWa}" target="_blank" style="display: block; width: 100%; background: #25d366; color: white; padding: 12px; border-radius: 6px; font-weight: 800; text-decoration: none; text-transform: uppercase; transition: background 0.3s; box-sizing: border-box;"><i class="fa-brands fa-whatsapp"></i> COTIZAR PIEZA</a>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
 
             grid.innerHTML = tarjetasHTML;
         }
 
-        // 4. Búsqueda Inteligente (Busca por descripción, marca O código oculto)
+        // 4. Búsqueda Inteligente
         function filtrarPorDescripcion(palabraBuscada) {
             if(event) event.preventDefault();
 
@@ -189,10 +267,21 @@
             );
             
             mostrarCatalogoLimpio(filtrados);
+            
+            // Hacer scroll suave hacia los productos si estamos en celular
+            if (window.innerWidth <= 768 && palabraBuscada !== '') {
+                document.querySelector('.section-title').scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
+        // Vincular el input y el botón
         document.getElementById('searchInput').addEventListener('input', function(e) {
             filtrarPorDescripcion(e.target.value);
+        });
+        
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const valor = document.getElementById('searchInput').value;
+            filtrarPorDescripcion(valor);
         });
 
         // 5. Arranque
